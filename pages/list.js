@@ -1,12 +1,12 @@
 import Link from "next/link";
 
-export default function List({ ownersList }) {
+export default function List({ gamesList }) {
   // const [owners, setOwners] = useState([]);
   // useEffect(() => {
   //   async function loadData() {
   //     const response = await fetch('http://localhost:4001/vehicles');
-  //     const ownersList = await response.json();
-  //     setOwners(ownersList);
+  //     const gamesList = await response.json();
+  //     setOwners(gamesList);
   //   }
 
   //   loadData();
@@ -14,11 +14,11 @@ export default function List({ ownersList }) {
 
   return (
     <div>
-      {ownersList.map((e, index) => (
+      {gamesList.map((e, index) => (
         <div key={index}>
           <Link as={`/${e.category}/${e.game}`} href="/[category]/[game]">
             <a>
-              Navigate to {e.ownerName}'s {e.vehicle}
+              Navigate to {e.category} and play {e.game}
             </a>
           </Link>
         </div>
@@ -28,7 +28,7 @@ export default function List({ ownersList }) {
 }
 
 List.getInitialProps = async () => {
-  const response = await fetch("http://localhost:4001/categories");
-  const ownersList = await response.json();
-  return { ownersList: ownersList };
+  const response = await fetch("http://localhost:4001/games");
+  const gamesList = await response.json();
+  return { gamesList: gamesList };
 };
